@@ -2,7 +2,7 @@
 
 This repo serve as a source code for SA’s wanting to deliver a demo around Realm and Atlas Device Sync. The scope of the demo includes the ability to keep user data automatically synchronized between intermittently internet-connected devices and a central database (Atlas) using Atlas Device Sync.
 
-__SA Maintainer__: [Aicha Sarr](mailto:aicha.sarr@mongodb.com), [Younes Berrada](mailto:younes.berrada@mongodb.com) <br/>
+__SA Maintainer__: [Aicha Sarr](mailto:aicha.sarr@mongodb.com) & [Younes Berrada](mailto:younes.berrada@mongodb.com) <br/>
 
 ---
 ## Summary
