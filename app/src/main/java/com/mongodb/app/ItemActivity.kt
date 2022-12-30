@@ -60,26 +60,50 @@ class ItemActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         }
         else {
-            config = SyncConfiguration.Builder(user, setOf(Item::class))
-                .initialSubscriptions (rerunOnOpen = true) { realm ->
-                    add(
-                        realm.query<Item>(
-                            "owner_id == $0 AND priority <= ${PriorityLevel.High.priority.toString()}",
-                            user.identity
-                        ),
-                        "User's Items",
-                        updateExisting = true,
-                    )
-                }
-                .waitForInitialRemoteData()
-                .build()
-            this.realm = Realm.open(config)
-            CoroutineScope(Dispatchers.IO).launch {
-                realm.subscriptions.waitForSynchronization()
+            if(user.identity==UserList.User1.user.toString()) {
+                config = SyncConfiguration.Builder(user, setOf(Item::class))
+                    .initialSubscriptions(rerunOnOpen = true) { realm ->
+                        add(
+                            realm.query<Item>(
+                                "owner_id == $0",
+                                user.identity
+                            ),
+                            "User's Items",
+                            updateExisting = true,
+                        )
+                    }
+                    .waitForInitialRemoteData()
+                    .build()
+                    this.realm = Realm.open(config)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        realm.subscriptions.waitForSynchronization()
+                    }
+                    val query = realm.query<Item>()
+                    itemAdapter = ItemAdapter(query.find(), realm, query.asFlow())
+                    recyclerView.adapter = itemAdapter
             }
-            val query = realm.query<Item>()
-            itemAdapter = ItemAdapter(query.find(), realm, query.asFlow())
-            recyclerView.adapter = itemAdapter
+            if(user.identity==UserList.User2.user.toString()) {
+                config = SyncConfiguration.Builder(user, setOf(Item::class))
+                    .initialSubscriptions(rerunOnOpen = true) { realm ->
+                        add(
+                            realm.query<Item>(
+                                "owner_id == $0 AND priority <= ${PriorityLevel.High.priority.toString()}",
+                                user.identity
+                            ),
+                            "User's Items",
+                            updateExisting = true,
+                        )
+                    }
+                    .waitForInitialRemoteData()
+                    .build()
+                    this.realm = Realm.open(config)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        realm.subscriptions.waitForSynchronization()
+                    }
+                    val query = realm.query<Item>()
+                    itemAdapter = ItemAdapter(query.find(), realm, query.asFlow())
+                    recyclerView.adapter = itemAdapter
+            }
         }
     }
 

@@ -11,6 +11,11 @@ enum class PriorityLevel(val priority: Int) {
         Low(3)
 }
 
+enum class UserList(val user: String) {
+        User1("63aed88bc2f1d1cd241fea65"),
+        User2("63aed8b445e112be72927b91")
+}
+
 open class Item() : RealmObject {
         @PrimaryKey
         var _id: ObjectId = ObjectId.create()
