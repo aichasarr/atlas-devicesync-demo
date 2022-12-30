@@ -1,8 +1,6 @@
 # Realm & Atlas Device Sync demo app
 
-This repo should serve as a source code for SA’s wanting to deliver a mobile demo around Realm and Atlas Device Sync.__
-
-__The scope of the demo includes the ability to keep user data automatically synchronized between intermittently internet-connected devices and a central database (Atlas) using Atlas Device Sync.__
+__This repo should serve as a source code for SA’s wanting to deliver a mobile demo around Realm and Atlas Device Sync. The scope of the demo includes the ability to keep user data automatically synchronized between intermittently internet-connected devices and a central database (Atlas) using Atlas Device Sync.__
 
 ---
 # Description
