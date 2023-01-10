@@ -104,27 +104,6 @@ class ItemActivity : AppCompatActivity() {
                     itemAdapter = ItemAdapter(query.find(), realm, query.asFlow())
                     recyclerView.adapter = itemAdapter
             }
-            //Not user1 or User2
-            config = SyncConfiguration.Builder(user, setOf(Item::class))
-                    .initialSubscriptions(rerunOnOpen = true) { realm ->
-                        add(
-                            realm.query<Item>(
-                                "owner_id == $0",
-                                user.identity
-                            ),
-                            "User's Items",
-                            updateExisting = true,
-                        )
-                    }
-                    .waitForInitialRemoteData()
-                    .build()
-                    this.realm = Realm.open(config)
-                    CoroutineScope(Dispatchers.IO).launch {
-                        realm.subscriptions.waitForSynchronization()
-                    }
-                    val query = realm.query<Item>()
-                    itemAdapter = ItemAdapter(query.find(), realm, query.asFlow())
-                    recyclerView.adapter = itemAdapter
         }
     }
 
